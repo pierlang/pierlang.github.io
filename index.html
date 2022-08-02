@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<title>Pier</title>
+
+<html>
+
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Noto+Serif&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="page_title" style="text-align:center">
+		<h1>Pier</h1>
+	</div>
+	<div class="page_content">
+		<p>
+			Pier is a new programming language that compiles to a custom VM platform.<br>
+			It is statically but weakly typed, procedural, and very similar to C.
+		</p>
+
+		<h2 style="text-align:center">
+			About the Project
+		</h2>
+		<p>
+			The Pier project is an attempt to create guaranteed platform-independence by creating a platform that supports 3D graphics, audio, networking, and many other things natively. It doesn't allow FFI and, with a strong focus on GPU programming, attempts to be compatible with any graphics API an implementation might use as its backend. This project has been in development for 4 years.
+		</p>
+
+		<h2 style="text-align:center">
+			Availability
+		</h2>
+		<p>
+			An outdated version of the standard library is available on GitHub at <a href="https://www.github.com/gabecampb/pier">github.com/gabecampb/pier</a>. The compiler and VM are not yet released.
+		</p>
+
+		<h2 style="text-align:center">
+			Platform Features
+		</h2>
+		<p>
+			• Graphics API (compatible with both modern and old graphics APIs)<br>
+			• Shaders, represented in a bytecode format<br>
+			• GPU computing<br>
+			• Multithreading<br>
+			• File I/O<br>
+			• SIMD<br>
+			• Multi-display support<br>
+			• Controller, touchscreen, keyboard & mouse support<br>
+			• Device orientation and position support<br>
+			• Image capture from display or cameras<br>
+			• 2D/3D audio<br>
+			• Sound transmission, absorption, and scattering<br>
+			• Audio file creation and editing<br>
+			• Audio recording<br>
+			• Audio playback<br>
+			• Video file creation and editing<br>
+			• Image file creation and editing<br>
+			• Video playback<br>
+			• Image loading<br>
+			• Ray tracing<br>
+			• Networking (TCP + UDP)
+		</p>
+
+		<h2 style="text-align:center">
+			Roadmap
+		</h2>
+		<p>
+			Access to all of the platform's features will be exposed through libraries over time.<br>
+			Short circuit evaluation will be added and the compiler will be optimized for performance & cleaner code generation.<br>
+			Compiler error messages will also be improved.<br><br>
+
+			The VM's shader bytecode to GLSL translator is still a bit of a work in progress. Hopefully the VM will receive JIT support in the future for a significant performance improvement, but completion of a few subsystems of the VM (such as shader translation, CPU compute shader emulation) is taking priority.<br><br>
+		</p>
+	</div>
+</body>
+</html>
