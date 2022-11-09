@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<title>Pier</title>
+<title>Pier | Portable Software Platform</title>
 
 <html>
 
@@ -11,41 +11,39 @@
 </head>
 
 <body>
-	<div class="page_title" style="text-align:center">
-		<h1>Pier</h1>
+	<div class="page_header">
+		<h1 style="font-family: DM Mono">Pier</h1>
+		<a href="tutorial.html" style="color:#EEEEEE; background-color:#555555">Tutorial</a>
 	</div>
-	<div class="page_content">
-		<p>
-			Pier is a new programming language that compiles to a custom VM platform.<br>
-			It is statically but weakly typed, procedural, and very similar to C.
-		</p>
-
-		<h2 style="text-align:center">
+	<div class="page_body">
+		<h3 style="text-align:center">
+			A modern software platform to deliver consistent experiences across all devices.
+			<br>
+			<small>Lightweight and simple.</small>
+		</h3>
+		<h2>
 			About the Project
 		</h2>
 		<p>
-			The Pier project is an attempt to create guaranteed platform-independence by creating a platform that supports 3D graphics, audio, networking, and many other things natively. It doesn't allow FFI and, with a strong focus on GPU programming, attempts to be compatible with any graphics API an implementation might use as its backend. This project has been in development for 4 years.
+			The Pier project is an attempt to create guaranteed platform-independence by creating a platform that provides interfaces for 3D graphics, audio, networking, and various other features natively. It doesn't allow FFI and, with a strong focus on GPU programming, attempts to be compatible with any graphics API an implementation might use as its backend. This project has been in development for 4 years.<br><br>
+
+			Pier is a procedural programming language which is very similar to C and runs on the Pier VM. The platform specification and the VM was created several years ago as an experimental project. Today, the VM provides the necessary capabilities for many types of software, and the platform specification defines all features that the VM will eventually support.<br><br>
+
+			Both the compiler and VM are still being tested, and aren't ready for production use. I'm currently using Pier to develop a 3D game engine, and the platform will continue to improve over time as bugs are found &amp; features get implemented.
 		</p>
 
-		<h2 style="text-align:center">
-			Availability
-		</h2>
-		<p>
-			The compiler is available on GitHub at <a href="https://www.github.com/gabecampb/pier">github.com/gabecampb/pier</a>, the VM at <a href="https://www.github.com/gabecampb/pier-vm">github.com/gabecampb/pier-vm</a>, and the assembler at <a href="https://www.github.com/gabecampb/pier-asm">github.com/gabecampb/pier-asm</a>. There are also some useful libraries, such as the standard library, available at <a href="https://www.github.com/gabecampb/pier-libraries">github.com/gabecampb/pier-libraries</a>.
-		</p>
-
-		<h2 style="text-align:center">
+		<h2>
 			Platform Features
 		</h2>
 		<p>
 			• Graphics API (compatible with both modern and old graphics APIs)<br>
 			• Shaders, represented in a bytecode format<br>
-			• GPU computing<br>
+			• GPU compute<br>
 			• Multithreading<br>
 			• File I/O<br>
 			• SIMD<br>
 			• Multi-display support<br>
-			• Controller, touchscreen, keyboard & mouse support<br>
+			• Controller, touchscreen, keyboard &amp; mouse support<br>
 			• Device orientation and position support<br>
 			• Image capture from display or cameras<br>
 			• 2D/3D audio<br>
@@ -61,15 +59,36 @@
 			• Networking (TCP + UDP)
 		</p>
 
-		<h2 style="text-align:center">
+		<h2>
+			Get Pier
+		</h2>
+		<p>
+		The compiler is available on GitHub at <a href="https://www.github.com/gabecampb/pier">github.com/gabecampb/pier</a>, the VM at <a href="https://www.github.com/gabecampb/pier-vm">github.com/gabecampb/pier-vm</a>, and the assembler at <a href="https://www.github.com/gabecampb/pier-asm">github.com/gabecampb/pier-asm</a>. There are also some useful libraries, such as the standard library, available at <a href="https://www.github.com/gabecampb/pier-libraries">github.com/gabecampb/pier-libraries</a>.<br><br>
+
+			See the <a href="tutorial.html">tutorial</a> page on this site for instructions on how to get started with Pier.
+		</p>
+
+		<h2>
+			Project State
+		</h2>
+		<p>
+			The compiler is still missing short-circuit evaluation, but there are only few known bugs and the language is mostly implemented. Error messages need improvement, the libraries aren't fully complete, and there's some refactoring to do.<br><br>
+			The VM supports the necessary features, but is still missing implementation of many of the features the specification defines as optional. Of course, all of the typical CPU instructions are implemented. The graphics API is OpenGL 3, and the traditional (rasterized) graphics pipeline is fully implemented.<br>
+			<ul>
+				<li>Optional missing features include ray tracing, networking, multi-display, touchscreen, controllers, and audio/video/image file support.
+				<li>Required features that still need to be implemented are compute shaders and SIMD.
+			</ul>
+		</p>
+
+		<h2>
 			Roadmap
 		</h2>
 		<p>
 			Access to all of the platform's features will be exposed through libraries over time.<br>
-			Short circuit evaluation will be added and the compiler will be optimized for performance & cleaner code generation.<br>
+			Short-circuit evaluation will be added and the compiler will be optimized for performance &amp; cleaner code generation.<br>
 			Compiler error messages will also be improved.<br><br>
 
-			Hopefully the VM will receive JIT support in the future for a significant performance improvement, but further completion of the VM is taking priority. There's still a good amount to be done; testing, bug fixing, and implementation of compute shaders (which will be emulated on the CPU) are some parts of that. I plan to implement audio/video support via FFmpeg.
+			Hopefully the VM will receive JIT support in the future for a significant performance improvement, but further completion of the VM is taking priority. There's still a good amount to be done; testing, bug fixing, and implementation of compute shaders (which will be emulated on the CPU) are some parts of that. I will likely implement audio/video support via FFmpeg.
 		</p>
 	</div>
 </body>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<title>Pier | Tutorial</title>
+
+<html>
+
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Noto+Serif&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="page_header">
+		<h1 style="font-family: DM Mono">Pier</h1>
+		<a href="index.html" style="color:#EEEEEE; background-color:#555555">Homepage</a>
+	</div>
+	<div class="page_body">
+		<p>
+			Welcome to the tutorial of the Pier programming language. For now, this is just a short description of the language's features and syntax, as well as how to compile and run Pier programs.
+		</p>
+
+		<h2>
+			Prerequisites
+		</h2>
+		<p>
+		Basic experience with using the command line is suggested.<br>
+		Moderate to advanced experience in C is expected.<br>
+		Linux is the only officially supported platform right now. Have also compiled on FreeBSD without issue.
+		</p>
+
+		<h2>
+			Getting Started
+		</h2>
+		<p>
+		Before we can begin, you will need the compiler, and the Pier VM. The source code can be obtained from my GitHub, <a href="https://www.github.com/gabecampb">github.com/gabecampb</a>. They will all need to be compiled from source. In your terminal, run the commands:
+		</p>
+
+		<code>git clone https://github.com/gabecampb/pier
+git clone https://github.com/gabecampb/pier-vm
+git clone https://github.com/gabecampb/pier-asm
+git clone https://github.com/gabecampb/pier-libraries</code>
+
+		<p>
+		The first command will clone the compiler repo, the second the VM repo, the third the assembler repo, and the fourth is the repo of some libraries we will be using shortly. The first three can then be compiled by:
+		</p>
+
+		<code>cd pier-vm
+cc vm.c -o pvm -lGL -lglfw -lm
+cd ../pier-asm
+cc assembler.c -o pasm
+cd ../pier
+cc compiler.c -o pc</code>
+
+		<p>
+		And that's it! We now have a copy of the compiler, assembler, and VM.<br><br>
+			
+		To use the compiler, the kernel.asm file found within the compiler's repo needs to be present in the working directory that the compiler is run from. This is a temporary requirement until the file is merged into the compiler, because the compiler reads kernel.asm for some important code to insert into compiled programs (it contains program loader code, and the implementation of system functions).<br><br>
+
+		Let's test this build of Pier by creating our first program. Of course, this will be a classic "Hello, World!". Create a file named hello.pi in the compiler's directory, with the following contents:
+		</p>
+		
+		-- pier/hello.pi
+		<code>use "stdlib.pi";
+fn main {
+	print("Hello, World!\n");
+}</code>
+
+		<p>
+		Now, we will proceed to compile the program, after we copy stdlib.pi from pier-libraries to the compiler's directory (the 'use' statement in this file is given as relative to the working directory the compiler is run from). This can be done by the below commands: 
+		</p>
+
+		<code>cp ../pier-libraries/stdlib.pi .
+./pc hello.pi stdlib.pi</code>
+
+		<p>
+		The compiler generates an out.asm file, which will be run through the assembler.<br><br>
+
+		Note that while stdlib.pi, being the "standard library", <i>should</i> ship with the compiler, it resides in a separate repo for now alongside other libraries I've created for the language since everything's still in development anyway.<br><br>
+
+		To run the generated out.asm through the assembler and then execute the resulting program, simply run the following:
+		</p>
+		<code>../pier-asm/pasm out.asm
+../pier-vm/pvm out.bin</code>
+
+		<p>
+		A program file named out.bin is created, and "Hello, World!" is printed to the console!
+		</p>
+
+		<h2>
+			Language Overview
+		</h2>
+		<p>
+		Pier is a language that is very similar to C, and C programmers should be comfortable with this language immediately. Keywords are short in interest of keeping code compact. Built-in data types include single-precision (32-bit) floating-point <b>f32</b> and double-precision (64-bit) floating-point <b>f64</b>, as well as unsigned (prefix u) and signed (prefix i) integers with sizes (suffix) 8-, 16-, 32-, or 64-bit (<b>u8</b>, <b>u16</b>, <b>u32</b>, <b>u64</b>, <b>i8</b>, <b>i16</b>, <b>i32</b>, <b>i64</b>).<br><br>
+
+		Control structures include while loops and conditionals - for loops aren't supported yet. Keywords <b>if</b>, <b>elif</b>, and <b>else</b> are used for conditionals, and <b>while</b> for while loops. Return statements use the keyword <b>ret</b>. Identifiers (for functions, variables, structure names) can contain characters from the alphabet, numbers 0-9, and underscores, but cannot start with a number.<br><br>
+
+		Floating-point numbers are guaranteed to be represented by IEEE-754, and signed integers are guaranteed to be represented by two's complement. Floating-point literals are f32 by default, but can be made f64 by suffixing the literal with d or D. The endianness of the platform is little-endian. The size of arrays must be given as integer literals, and global variable initializations must be constant expressions. The initial value of local variables, unless they're initialized, is undefined; its value will just be whatever was previously on the stack at the variable's address.<br><br>
+		
+		All of main memory is initialized to 0 when the VM starts. There is no array initializer expressions yet, so initializing an array can be a bit of a pain.<br><br>
+
+		Variables can be defined as arrays with [size] following their identifier, and variable definitions (regardless of whether occuring in global scope, in a function, or in a struct definition) can have a list of definitions. Pointers are supported; the * denoting that a variable is a pointer must follow the type name, and for the 2nd or later variable names in a multi-variable definition, must in front of the identifier. Structures can be defined as <b>struct struct_name { ..field_defs.. }</b>. Here's an example of struct and variable definitions:
+		</p>
+		<code>i32 x, y=5;
+i32** z, *w[2];
+struct my_type_t {
+	f32 a[4];
+	u8 b[2];
+}
+my_type_t objects[10];</code>
+
+		<p>
+
+		Function definitions are of the form:<br><b>fn [type] identifier (param_list)</b>.<br>
+		The type following fn is an optional return type specifier. The parameters list can be omitted entirely (optionally omitting the parentheses as well) for defining functions with no parameters. The parameter list is comma-separated, with each parameter being specified as: <b>type identifier</b>.<br>
+		A few examples of valid function definitions:
+		</p>
+		<code>fn u64 my_function(f32 x, i32* y) { ; }
+fn my_function2() { ; }
+fn my_function3 { ; }</code>
+
+		<p>Below is a list of all currently reserved keywords.</p>
+		<code>use fn while if elif else ret i8 i16 i32 i64 u8 u16 u32 u64 f32 f64 sizeof struct</code>
+
+		<h2>
+			Operators
+		</h2>
+		<p>
+			Pier supports a variety of different unary and binary operators, which each have some precedence level and either left-to-right or right-to-left associativity. Below is a list of all of the currently available operators, including their precedence level, associativity, and arity:
+		</p>
+<code>Precedence | Associativity | Arity  | Symbol | Description
+----------------------------------------------------------------------------------
+1          | left-to-right | Binary | []     | Index
+1          | left-to-right | Binary | .      | Field access
+1          | left-to-right | Binary | ->     | Field access, for struct pointer
+2          | right-to-left | Unary  | -      | Unary minus
+2          | right-to-left | Unary  | +      | Unary plus
+2          | right-to-left | Unary  | !      | Logical NOT
+2          | right-to-left | Unary  | ~      | Bitwise NOT
+2          | right-to-left | Unary  | (type) | Typecast
+2          | right-to-left | Unary  | *      | Dereference
+2          | right-to-left | Unary  | &      | Address-of
+3          | left-to-right | Binary | *      | Multiplication
+3          | left-to-right | Binary | /      | Division
+3          | left-to-right | Binary | %      | Modulo
+4          | left-to-right | Binary | +      | Addition
+4          | left-to-right | Binary | -      | Subtraction
+5          | left-to-right | Binary | <<     | Bitshift left
+5          | left-to-right | Binary | >>     | Bitshift right
+6          | left-to-right | Binary | <      | Relational less than
+6          | left-to-right | Binary | <=     | Relational less than or equal to
+6          | left-to-right | Binary | >      | Relational greater than
+6          | left-to-right | Binary | >=     | Relational greater than or equal to
+7          | left-to-right | Binary | ==     | Relational equal
+7          | left-to-right | Binary | !=     | Relational not equal
+8          | left-to-right | Binary | &      | Bitwise AND
+9          | left-to-right | Binary | ^      | Bitwise XOR
+10         | left-to-right | Binary | |      | Bitwise OR
+11         | left-to-right | Binary | &&     | Logical AND
+12         | left-to-right | Binary | ||     | Logical OR
+13         | right-to-left | Binary | =      | Assignment
+13         | right-to-left | Binary | *=     | Multiply and assign
+13         | right-to-left | Binary | +=     | Add and assign
+13         | right-to-left | Binary | -=     | Subtract and assign
+13         | right-to-left | Binary | /=     | Divide and assign
+13         | right-to-left | Binary | %=     | Modulo and assign
+13         | right-to-left | Binary | <<=    | Bitshift left and assign
+13         | right-to-left | Binary | >>=    | Bitshift right and assign
+13         | right-to-left | Binary | |=     | Bitwise OR and assign
+13         | right-to-left | Binary | ^=     | Bitwise XOR and assign
+13         | right-to-left | Binary | &=     | Bitwise AND and assign
+</code>
+
+			<h2>
+				The Standard Library
+			</h2>
+			<p>
+			The <a href="https://github.com/gabecampb/pier-libraries">pier-libraries</a> repo provides stdlib.pi, which is intended to eventually ship alongside the compiler to serve as the standard library. Being unfinished, it's still subject to changes, but it's a small enough library that maintaining your own copy of it for each program you write is easy. Additionally, the libraries are dedicated to the public domain, so there's no limitations on how you use them.<br><br>
+
+			Functions provided include file I/O, memory allocation functions, printing functions, rand() and srand() for pseudo-random numbers, math functions, and more.
+			Each system call is submitted to the kernel using the __syscall() function, which writes an 8-bit syscall ID and 64-bit syscall parameter to the location in memory which corresponds to the current thread's syscall request (this region is checked periodically by the kernel).
+			</p>
+			<p style="text-align:center"><u><i>More will be added to this tutorial soon.</i></u></p>
+	</div>
+</body>
+</html>

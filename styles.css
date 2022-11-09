@@ -1,33 +1,43 @@
-.page_content {
-    margin-left: auto;
-    margin-right: auto;
-	padding: 1%;
-    width: 60em;
-    background-color: #111111;
+.page_header {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: .1%;
+	padding-bottom: .1%;
+	text-align: center;
     color: #EEEEEE;
+    background-color: #111111;
     font-family: Noto Serif;
 	font-size: 0.9em;
 }
 
-.code_content {
-	margin-left: auto;
-    margin-right: auto;
+code {
+	margin-left: 5%;
+	margin-right: 5%;
 	padding: 1%;
-	width: 60em;
-	background-color: #222222;
-	color: #FFFFFF;
+	display: block;
+	white-space: pre-wrap;
 	font-family: DM Mono;
+	color: #000000;
+	background-color: #CCCCCC;
+	border-style: dashed;
+	border-width: 1px;
 }
 
-.page_title {
+.page_body {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 1%;
 	width: 60em;
-	background-color: #111111; 
-	color: #EEEEEE;
-	font-family: DM Mono;
+	box-sizing: border-box;		/* adding padding does not change size of div */
+	color: #262625;
+	background-color: #E1E1DB;
+	font-family: Noto Serif;
 	font-size: 0.9em;
+}
+
+.page_body h2 {
+	font-family: DM Mono;
+	text-align: center;
 }
 
 .centered_image {
@@ -37,7 +47,7 @@
 }
 
 body {
-	background-color: #111111;
+	background-color: #AAAAAA;
 }
 
 /* the below code fixes the body not covering the full page */
@@ -61,11 +71,14 @@ html, body {
 /* the below code modifies how links appear */
 
 a:link, a:visited, a:active {
-	color: #A2A2A2;
+/*	color: #A2A2A2;*/
+	font-family: DM Mono;
+	color: #085c61;
     text-decoration: none;
 }
 
 a:hover {
-	color: #A2A2A2;
+	font-family: DM Mono;
+	color: #085c61;
     text-decoration: underline;
 }
