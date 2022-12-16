@@ -95,9 +95,7 @@ fn main {
 
 		Control structures include while loops and conditionals - for loops aren't supported yet. Keywords <b>if</b>, <b>elif</b>, and <b>else</b> are used for conditionals, and <b>while</b> for while loops. Return statements use the keyword <b>ret</b>. Identifiers (for functions, variables, structure names) can contain characters from the alphabet, numbers 0-9, and underscores, but cannot start with a number.<br><br>
 
-		Floating-point numbers are guaranteed to be represented by IEEE-754, and signed integers are guaranteed to be represented by two's complement. Floating-point literals are f32 by default, but can be made f64 by suffixing the literal with d or D. The endianness of the platform is little-endian. The size of arrays must be given as integer literals, and global variable initializations must be constant expressions. The initial value of local variables, unless they're initialized, is undefined; its value will just be whatever was previously on the stack at the variable's address.<br><br>
-		
-		All of main memory is initialized to 0 when the VM starts. There is no array initializer expressions yet, so initializing an array can be a bit of a pain.<br><br>
+		Floating-point numbers are guaranteed to be represented by IEEE-754, and signed integers are guaranteed to be represented by two's complement. Floating-point literals are f32 by default, but can be made f64 by suffixing the literal with d or D. The endianness of the platform is little-endian. The size of arrays must be given as integer literals, and global variable initializations must be constant expressions. The initial value of local variables, unless they're initialized, is undefined; its value will just be whatever was previously on the stack at the variable's address. All of main memory is initialized to 0 when the VM starts.<br><br>
 
 		Variables can be defined as arrays with [size] following their identifier, and variable definitions (regardless of whether occuring in global scope, in a function, or in a struct definition) can have a list of definitions. Pointers are supported; the * denoting that a variable is a pointer must follow the type name, and for the 2nd or later variable names in a multi-variable definition, must in front of the identifier. Structures can be defined as <b>struct struct_name { ..field_defs.. }</b>. Here's an example of struct and variable definitions:
 		</p>
@@ -107,7 +105,8 @@ struct my_type_t {
 	f32 a[4];
 	u8 b[2];
 }
-my_type_t objects[10];</code>
+my_type_t objects[10];
+f32 floats[2] = { 2.5, 1. };</code>
 
 		<p>
 
