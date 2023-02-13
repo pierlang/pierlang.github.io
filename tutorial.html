@@ -15,6 +15,7 @@
 		<h1 style="font-family: DM Mono">Pier</h1>
 		<a href="https://www.pierlang.dev" style="color:#EEEEEE; background-color:#555555">Homepage</a>
 	</div>
+
 	<div class="page_body">
 		<p>
 			Welcome to the tutorial of the Pier programming language. For now, this is just a short description of the language's features and syntax, as well as how to compile and run Pier programs.
@@ -127,49 +128,7 @@ fn my_function3 { ; }</code>
 		<p>
 			Pier supports a variety of different unary and binary operators, which each have some precedence level and either left-to-right or right-to-left associativity. Below is a list of all of the currently available operators, including their precedence level, associativity, and arity:
 		</p>
-<code>Precedence | Associativity | Arity  | Symbol | Description
-----------------------------------------------------------------------------------
-1          | left-to-right | Binary | []     | Index
-1          | left-to-right | Binary | .      | Field access
-1          | left-to-right | Binary | ->     | Field access, for struct pointer
-2          | right-to-left | Unary  | -      | Unary minus
-2          | right-to-left | Unary  | +      | Unary plus
-2          | right-to-left | Unary  | !      | Logical NOT
-2          | right-to-left | Unary  | ~      | Bitwise NOT
-2          | right-to-left | Unary  | (type) | Typecast
-2          | right-to-left | Unary  | *      | Dereference
-2          | right-to-left | Unary  | &      | Address-of
-3          | left-to-right | Binary | *      | Multiplication
-3          | left-to-right | Binary | /      | Division
-3          | left-to-right | Binary | %      | Modulo
-4          | left-to-right | Binary | +      | Addition
-4          | left-to-right | Binary | -      | Subtraction
-5          | left-to-right | Binary | <<     | Bitshift left
-5          | left-to-right | Binary | >>     | Bitshift right
-6          | left-to-right | Binary | <      | Relational less than
-6          | left-to-right | Binary | <=     | Relational less than or equal to
-6          | left-to-right | Binary | >      | Relational greater than
-6          | left-to-right | Binary | >=     | Relational greater than or equal to
-7          | left-to-right | Binary | ==     | Relational equal
-7          | left-to-right | Binary | !=     | Relational not equal
-8          | left-to-right | Binary | &      | Bitwise AND
-9          | left-to-right | Binary | ^      | Bitwise XOR
-10         | left-to-right | Binary | |      | Bitwise OR
-11         | left-to-right | Binary | &&     | Logical AND
-12         | left-to-right | Binary | ||     | Logical OR
-13         | right-to-left | Binary | =      | Assignment
-13         | right-to-left | Binary | *=     | Multiply and assign
-13         | right-to-left | Binary | +=     | Add and assign
-13         | right-to-left | Binary | -=     | Subtract and assign
-13         | right-to-left | Binary | /=     | Divide and assign
-13         | right-to-left | Binary | %=     | Modulo and assign
-13         | right-to-left | Binary | <<=    | Bitshift left and assign
-13         | right-to-left | Binary | >>=    | Bitshift right and assign
-13         | right-to-left | Binary | |=     | Bitwise OR and assign
-13         | right-to-left | Binary | ^=     | Bitwise XOR and assign
-13         | right-to-left | Binary | &=     | Bitwise AND and assign
-</code>
-
+		<img src="operators.png" style="width:75%;height:25%;display: block;margin-left: auto;margin-right: auto">
 			<h2>
 				The Standard Library
 			</h2>
